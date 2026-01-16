@@ -1,4 +1,4 @@
-/* João Gabriel Carvalho Criscolo, Plinio Cardoso Alves, Bernardo Corradi Oliveira */
+/* João Gabriel Carvalho Criscolo, Plinio Alves Cardoso, Bernardo Corradi Oliveira */
 
 #include <iostream>
 #include <cstring>
@@ -336,17 +336,15 @@ int leitura(int &capacidade, int &tam, musico *&lista) {
         cout << "Erro ao abrir o arquivo!" << endl;
         return -1;
     }
-	bool a= true;  // Controle do loop de leitura
-    while (a) {
+	
+    while (!(entrada.eof() || lista[tam].nome == "")) {
         if (tam >= capacidade) { // Verifica se precisa redimensionar
             redimensionar(lista, capacidade);
         }
 		
 		 // Lê campos do arquivo
         getline(entrada, lista[tam].nome, ';'); // Nome do músico
-        if (entrada.eof() || lista[tam].nome == "") a= false; // Fim do arquivo
-        else {
-
+     
         entrada >> lista[tam].idade;
         entrada.ignore();
         entrada >> lista[tam].CPF;
@@ -355,7 +353,7 @@ int leitura(int &capacidade, int &tam, musico *&lista) {
         getline(entrada, lista[tam].banda,';');
         entrada.ignore();
         tam++; // Incrementa quantidade de músicos lidos
-		}
+		
     }
 
     entrada.close();  // Fecha arquivo
